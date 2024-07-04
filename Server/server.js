@@ -1,0 +1,18 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt')
+const cors = require('cors')
+const dotenv = require('dotenv')
+const userRoute = require('./Routes/userRoute')
+const taxiOwnerAndVehicleRoute = require('./Routes/taxiOwnerRouter')
+const connectDB = require('./Config/db')
+const app = express();
+app.use(bodyParser.json())
+app.use(cors())
+dotenv.config()
+app.use('/v1/user',userRoute )
+app.use('/v1/service/provider', taxiOwnerAndVehicleRoute)
+app.listen('8000', () => {
+    connectDB()
+    console.log("server is running on 8000")
+})
