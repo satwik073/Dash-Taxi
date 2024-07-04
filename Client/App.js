@@ -1,17 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View ,ScrollView} from 'react-native';
 import LoginForm from './Auth/LoginForm';
 import FetchingData from './Screens/FetchingData';
 
 export default function App() {
   return (
     <SafeAreaView style ={styles.container}>
-      <View >
+      <ScrollView showsVerticalScrollIndicator = {false} >
         <Text>hey ! satwik this side database connected</Text>
         <StatusBar style="auto" />
         {/* <LoginForm/><FetchingData/> */}
-        <FetchingData/>
-      </View>
+        <FetchingData />
+        <LoginForm/>
+      </ScrollView>
     </SafeAreaView>
   );
 }

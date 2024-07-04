@@ -1,14 +1,29 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View , Button, ScrollView} from 'react-native'
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const LoginForm = () => {
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setpassword] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setpassword] = useState('')
+    const handleSubmitResponse = () => {
+        const data = {
+            name, email, password
+        }
+        axios.post("https://dash-backend-glqb.onrender.com/v1/user/register", data)
+            .then(response => {
+                console.log('Success:', response.data)
+            })
+            .catch(error => {
+                console.error('Error:', error)
+                Alert.alert('Error', 'Something went wrong')
+            });
+
+    }
     return (
 
         <View>
-            <Text style={[styles.boldTheText, { textAlign: 'center' }]}>Uber<Text style={{fontWeight: 'heavy', fontSize: 70, color:'#4B70F5'}}>.</Text></Text>
+            <Text style={[styles.boldTheText, { textAlign: 'center' }]}>Uber<Text style={{ fontWeight: 'heavy', fontSize: 70, color: '#4B70F5' }}>.</Text></Text>
             <Text style={styles.boldTheText}>Name</Text>
             <TextInput
                 placeholder='Enter your name'
@@ -29,6 +44,7 @@ const LoginForm = () => {
                 onChangeText={setpassword}
 
             />
+            <Button title='Register' onPress={handleSubmitResponse}/>
 
 
         </View>
